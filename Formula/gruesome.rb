@@ -9,13 +9,13 @@ class Gruesome < Formula
 
   def install
     # Build the main interpreter
-    system "cargo", "install", "--bin", "gruesome", "--path", ".", *std_cargo_args
+    system "cargo", "install", "--bin", "gruesome", *std_cargo_args
 
     # Build the compiler
-    system "cargo", "install", "--bin", "grue-compiler", "--path", ".", *std_cargo_args
+    system "cargo", "install", "--bin", "grue-compiler", *std_cargo_args
 
     # Build the disassembler (if available)
-    system "cargo", "install", "--bin", "gruedasm-txd", "--path", ".", *std_cargo_args
+    system "cargo", "install", "--bin", "gruedasm-txd", *std_cargo_args
   end
 
   test do
@@ -41,6 +41,9 @@ class Gruesome < Formula
 
       • gruedasm-txd: Enhanced Z-Machine disassembler
         Usage: gruedasm-txd game.z3
+
+      Security Note: These tools were built from source on your machine,
+      so they will not trigger macOS Gatekeeper warnings.
 
       Example Zork I gameplay:
         Download a Z-Machine game file and run:

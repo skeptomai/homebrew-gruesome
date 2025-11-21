@@ -46,14 +46,14 @@ Gruesome is a complete Z-Machine ecosystem that includes:
 - **🔍 Advanced Disassembler**: Enhanced analysis tools for Z-Machine files
 - **📚 Comprehensive Testing**: Verified with commercial Infocom games
 
-## macOS Security Note
+## Security Benefits
 
-If you see "cannot be opened" warnings, run:
-```bash
-xattr -d com.apple.quarantine /opt/homebrew/bin/gruesome
-xattr -d com.apple.quarantine /opt/homebrew/bin/grue-compiler
-xattr -d com.apple.quarantine /opt/homebrew/bin/gruedasm-txd
-```
+**No macOS security warnings!** This Homebrew tap builds tools from source on your machine, which means:
+
+- ✅ No Gatekeeper "cannot be opened" warnings
+- ✅ No quarantine attributes or manual xattr commands needed
+- ✅ No unsigned binary security concerns
+- ✅ Locally compiled binaries are automatically trusted by macOS
 
 ## Alternative Installation
 
