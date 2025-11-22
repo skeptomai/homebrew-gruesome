@@ -1,3 +1,5 @@
+# Homebrew formula for Gruesome Z-Machine interpreter and toolkit
+# Provides installation of gruesome, grue-compiler, and gruedasm-txd
 class Gruesome < Formula
   desc "Z-Machine interpreter and compiler for Infocom text adventures like Zork"
   homepage "https://github.com/skeptomai/gruesome"
@@ -22,12 +24,15 @@ class Gruesome < Formula
   end
 
   test do
-    # Test version commands work
+    # Comprehensive end-to-end test of the complete Z-Machine toolkit
+    # Tests the full workflow: source → compile → disassemble → interpret
+
+    # Verify all three tools respond to version commands
     assert_match "gruesome", shell_output("#{bin}/gruesome --version 2>&1")
     assert_match "grue-compiler", shell_output("#{bin}/grue-compiler --version 2>&1")
     assert_match "gruedasm-txd", shell_output("#{bin}/gruedasm-txd --version 2>&1")
 
-    # Copy the example Grue source to test directory
+    # Copy the bundled example Grue source to test directory
     cp pkgshare/"mini_zork.grue", testpath/"mini_zork.grue"
     assert_predicate testpath/"mini_zork.grue", :exist?
 
