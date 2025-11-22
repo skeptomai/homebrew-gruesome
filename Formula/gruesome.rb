@@ -16,17 +16,35 @@ class Gruesome < Formula
 
     # Build the disassembler (if available)
     system "cargo", "install", "--bin", "gruedasm-txd", *std_cargo_args
+
+    # Install example Grue source for testing and user reference
+    pkgshare.install "examples/mini_zork.grue"
   end
 
   test do
-    # Test the interpreter
+    # Test version commands work
     assert_match "gruesome", shell_output("#{bin}/gruesome --version 2>&1")
-
-    # Test the compiler
     assert_match "grue-compiler", shell_output("#{bin}/grue-compiler --version 2>&1")
+    assert_match "gruedasm-txd", shell_output("#{bin}/gruedasm-txd --version 2>&1")
 
-    # Test basic functionality with a minimal Z3 file (if available)
-    # This could be enhanced to test with a simple compiled game
+    # Copy the example Grue source to test directory
+    cp pkgshare/"mini_zork.grue", testpath/"mini_zork.grue"
+    assert_predicate testpath/"mini_zork.grue", :exist?
+
+    # Test 1: Compiler - compile Grue source to Z-machine bytecode
+    system bin/"grue-compiler", testpath/"mini_zork.grue", "-o", testpath/"mini_zork.z3"
+    assert_predicate testpath/"mini_zork.z3", :exist?
+    assert_operator (testpath/"mini_zork.z3").size, :>, 0
+
+    # Test 2: Disassembler - analyze the compiled Z-machine file
+    disasm_output = shell_output("#{bin}/gruedasm-txd #{testpath}/mini_zork.z3")
+    assert_match(/header|Header|HEADER/, disasm_output, "Disassembler should show Z-machine header info")
+
+    # Test 3: Interpreter - smoke test that it can load and run the game
+    # Send 'quit' command to exit cleanly
+    interpreter_output = shell_output("echo 'quit' | #{bin}/gruesome #{testpath}/mini_zork.z3 2>&1")
+    # Just verify it doesn't crash - any output means it loaded successfully
+    assert_operator interpreter_output.length, :>, 0
   end
 
   def caveats
