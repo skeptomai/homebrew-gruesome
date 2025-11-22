@@ -1,8 +1,8 @@
 class Gruesome < Formula
   desc "Z-Machine interpreter and compiler for Infocom text adventures like Zork"
   homepage "https://github.com/skeptomai/gruesome"
-  url "https://github.com/skeptomai/gruesome/archive/v2.11.1.tar.gz"
-  sha256 "2d75570f9530c143cd1bdf4220bee8ec5e2e98fdbd9c8b7f6ea976811f0b3ace"
+  url "https://github.com/skeptomai/gruesome/archive/v2.12.0.tar.gz"
+  sha256 "156e64d80c39359e53b5257def6a86418c7cc7c9e5076cfe0edb012eff98a032"
   license "MIT"
 
   depends_on "rust" => :build
