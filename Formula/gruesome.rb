@@ -45,9 +45,22 @@ class Gruesome < Formula
       Security Note: These tools were built from source on your machine,
       so they will not trigger macOS Gatekeeper warnings.
 
-      Example Zork I gameplay:
-        Download a Z-Machine game file and run:
+      Finding Z-Machine Games:
+
+      Free Games:
+      • Interactive Fiction Database: https://ifdb.org
+      • Infocom Cabinet: https://archive.org (search "Infocom")
+      • Modern IF: https://intfiction.org/c/games
+
+      Commercial Classics:
+      • Steam: "The Zork Anthology" and other Infocom collections
+      • GOG.com: Classic Infocom adventure games
+      • itch.io: Independent interactive fiction
+
+      Example gameplay:
+        gruesome game.z3
         gruesome ZORK1.DAT
+        grue-compiler my_story.grue -o my_game.z3
 
       For more information, visit:
       https://github.com/skeptomai/gruesome
